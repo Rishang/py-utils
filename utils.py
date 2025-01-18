@@ -31,13 +31,12 @@ def retry(func, tries=3, func_args: tuple = (), exceptions: tuple = (Exception,)
                 continue
 
 
-def not_none(data, type):
-    if isinstance(data, str) and len(data.strip()) == 0:
-        return False
-    elif isinstance(data, type) and len(data) != 0:
-        return True
-    else:
-        return False
+def is_none(data, type):
+    return (data is None or 
+            (isinstance(data, str) and not data.strip()) or
+            (isinstance(data, type) and not data) or 
+            not isinstance(data, type))
+
 
 
 def md_print(text: str):
